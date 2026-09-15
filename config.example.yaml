@@ -1,0 +1,52 @@
+# Copiez ce fichier en "config.yaml" et adaptez-le à votre situation.
+# Aucun mot de passe ne doit figurer ici : ils sont stockés séparément
+# dans le trousseau du système (voir README.md).
+
+comptes:
+  - nom: "Compte principal"
+    email: "votre_email@gmail.com"
+    serveur_imap: "imap.gmail.com"
+    port: 993
+    dossier: "INBOX"
+    marquer_comme_lu: false   # false = le mail reste "non lu" dans votre boîte
+
+  # Vous pouvez surveiller plusieurs comptes en même temps :
+  # - nom: "Compte pro"
+  #   email: "pro@entreprise.com"
+  #   serveur_imap: "imap.entreprise.com"
+  #   port: 993
+  #   dossier: "INBOX"
+  #   marquer_comme_lu: false
+
+parametres:
+  intervalle_secours_secondes: 60   # utilisé seulement si le serveur ne supporte pas IDLE
+  historique_db: "historique_mails.db"
+  fichier_log: "notification_mail.log"
+
+voix:
+  vitesse: 170        # mots par minute (défaut ~200)
+  volume: 1.0         # de 0.0 (muet) à 1.0
+  voix_id: null       # null = voix par défaut. Utilisez --lister-voix pour voir les choix
+
+filtres:
+  expediteurs_vip:
+    - "patron@entreprise.com"
+  expediteurs_ignores:
+    - "newsletter@exemple.com"
+    - "no-reply@"
+  mots_cles_ignores:
+    - "unsubscribe"
+    - "promo"
+
+annonce:
+  lire_extrait_corps: true
+  longueur_extrait: 100   # nombre de caractères lus du corps du mail
+
+ne_pas_deranger:
+  actif: true
+  heure_debut: "22:00"
+  heure_fin: "07:00"
+  vip_bypass: true        # les mails VIP sont annoncés même en période de silence
+
+notification_visuelle:
+  active: true
