@@ -1,0 +1,34 @@
+name: Construire l'exécutable Windows
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Construire l'exécutable
+        run: pyinstaller packaging\notification_mail_vocale.spec
+
+      - name: Publier l'exécutable comme artefact téléchargeable
+        uses: actions/upload-artifact@v4
+        with:
+          name: NotificationMailVocale-Windows
+          path: dist/**
+          if-no-files-found: error
